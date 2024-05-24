@@ -15,8 +15,8 @@ if __name__ == "__main__":
         sentence_builder,
         [
             "audio",
-            gr.Slider(1, 1000, step=1, value=1, label="Count", info="Shkibididobsteeeep"),
-            gr.Slider(0, 10, step=0.05, value=0, label="Offset", info="Sec between Shkibididobsteeeep")
+            gr.Slider(1, 1000, step=1, value=1, label="Count"),
+            gr.Slider(0, 10, step=0.05, value=0, label="Offset")
         ],
         "audio"
     )
