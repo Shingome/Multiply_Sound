@@ -1,24 +1,24 @@
 import gradio as gr
-from pydub import AudioSegment
 from src.multiply_audio import multiply_audio
+from src.convertation import np_to_audio
 
 
-def sentence_builder(count: int, offset: float):
-    file = "tmp/tmp.mp3"
+def sentence_builder(audio, count: int, offset: float):
+    raw_audio = np_to_audio(audio[0], audio[1])
+    file = "tmp/sound.mp3"
     multiply_audio(raw_audio, count, offset * 1000.).export(file)
     return file
 
 
-demo = gr.Interface(
-    sentence_builder,
-    [
-        gr.Slider(1, 1000, step=1, value=1, label="Count", info="Shkibididobsteeeep"),
-        gr.Slider(0, 5, step=0.05, value=0, label="Offset", info="Sec between Shkibididobsteeeep")
-    ],
-    "audio"
-)
-
-raw_audio = AudioSegment.from_file("sound.mp3")
-
 if __name__ == "__main__":
-    demo.launch()
+    iface = gr.Interface(
+        sentence_builder,
+        [
+            "audio",
+            gr.Slider(1, 1000, step=1, value=1, label="Count", info="Shkibididobsteeeep"),
+            gr.Slider(0, 10, step=0.05, value=0, label="Offset", info="Sec between Shkibididobsteeeep")
+        ],
+        "audio"
+    )
+
+    iface.launch()

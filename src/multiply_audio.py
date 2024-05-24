@@ -8,11 +8,3 @@ def multiply_audio(audio: AudioSegment, count: int, offset: float, progress=gr.P
         audio_result = audio_result.overlay(audio, position=i * offset)
 
     return audio_result
-
-
-if __name__ == "__main__":
-    raw_audio = AudioSegment.from_file("../sound.mp3")
-
-    combined_audio = multiply_audio(raw_audio, 10, 1000)
-
-    combined_audio.export("combined_audio.mp3", format="mp3")
